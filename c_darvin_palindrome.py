@@ -19,21 +19,31 @@ class Stack:
         return self.items
 
 
+def is_alphanumeric(char):
+    alphanumeric_chars = (
+        "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    )
+    return char in alphanumeric_chars
+
+
 def check_palindrome(sentence):
     stack = Stack()
 
     # Prepare the original sentence by filtering non-alphanumeric characters and converting to lowercase
-    original_sentence = "".join(word.lower() for word in sentence if word.isalnum())
+    original_sentence = "".join(
+        word.lower() for word in sentence if is_alphanumeric(word) or word.isspace()
+    )
 
     for word in original_sentence:
-        stack.push(word)
+        if word != " ":  # Exclude spaces while pushing to the stack
+            stack.push(word)
 
     # Reverse the sentence by popping characters from the stack
     reversed_str = ""
     while not stack.is_empty():
         reversed_str += stack.pop()
 
-    # Return the original sentence and its reversed form
+    # Return the original sentence (with spaces) and its reversed form
     return original_sentence, reversed_str
 
 
@@ -49,11 +59,12 @@ def main():
 
         # We have a conditional statement that will check whether the value of the variables original and reverse are the same
         if original == reverse:
-            print(f"The sentence '{sentence}' is a palindrome.\n")
+            print(f"The sentence '{sentence}' is a palindrome.")
         else:
-            print(f"The sentence '{sentence}' is not a palindrome.\n")
+            print(f"The sentence '{sentence}' is not a palindrome.")
 
         # After stating if the sentence is a palindrome or not, our code will then show how the original and reversed sentences differ
+        print()
         print("-----------------------------------------")
         print(f"Original sentence: '{original}'")
         print(f"Reversed sentence: '{reverse}'")
