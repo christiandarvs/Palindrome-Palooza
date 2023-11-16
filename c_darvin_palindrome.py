@@ -31,7 +31,7 @@ def check_palindrome(sentence):
 
     # Prepare the original sentence by filtering non-alphanumeric characters and converting to lowercase
     original_sentence = "".join(
-        word.lower() for word in sentence if is_alphanumeric(word) or word.isspace()
+        word.lower() for word in sentence if is_alphanumeric(word) or (word == " ")
     )
 
     for word in original_sentence:
@@ -81,7 +81,7 @@ def main():
                 print("Thank you for using Palindrome Palooza!")
                 sys.exit()
             else:
-                print("Invalid Input. Please type [y] or [n].")
+                print("Invalid Input. Please type [y] or [n].\n")
 
 
 if __name__ == "__main__":
